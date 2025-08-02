@@ -1,0 +1,54 @@
+{
+    "name": "erwane/phpunit-resource-helper",
+    "description": "File resources helpers for PHPUnit tests",
+    "type": "library",
+    "keywords": [
+        "phpunit",
+        "helper",
+        "resources"
+    ],
+    "homepage": "https://github.com/Erwane/phpunit-resource-helper",
+    "support": {
+        "issues": "https://github.com/Erwane/phpunit-resource-helper/issues",
+        "source": "https://github.com/Erwane/phpunit-resource-helper"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Erwane",
+            "email": "erwane@phea.fr",
+            "homepage": "https://erwane-breton.fr"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "cakephp/cakephp-codesniffer": "^4.0",
+        "phpunit/phpunit": "^8.5",
+        "symfony/var-dumper": "^v5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "ResourceHelper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ResourceHelper\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "platform-check": true,
+        "sort-packages": true,
+        "prefered-install": "dist",
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "scripts": {
+        "cscheck": "php vendor/bin/phpcs -p -s src tests",
+        "csfix": "php vendor/bin/phpcbf src tests"
+    }
+}
