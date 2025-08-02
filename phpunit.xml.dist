@@ -14,4 +14,7 @@
             <directory suffix=".php" phpVersion="7.2">src/</directory>
         </whitelist>
     </filter>
+    <extensions>
+        <extension class="ResourceHelper\PHPUnitExtension"></extension>
+    </extensions>
 </phpunit>
