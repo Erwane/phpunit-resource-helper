@@ -10,13 +10,11 @@ declare(strict_types=1);
 
 namespace ResourceHelper\Test\TestCase;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ResourceHelper\ResourceHelper;
 
-/**
- * @uses   \ResourceHelper\ResourceHelper
- * @covers \ResourceHelper\ResourceHelper
- */
+#[CoversClass(ResourceHelper::class)]
 class ResourceHelperTest extends TestCase
 {
     protected $_currentBaseDir;
@@ -54,7 +52,7 @@ class ResourceHelperTest extends TestCase
 
         $this->assertEquals(
             dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR,
-            $path
+            $path,
         );
     }
 
@@ -65,7 +63,7 @@ class ResourceHelperTest extends TestCase
 
         $this->assertEquals(
             '/tmp/erwane-phpunit-resource-helper/',
-            $path
+            $path,
         );
     }
 
@@ -75,7 +73,7 @@ class ResourceHelperTest extends TestCase
 
         $this->assertEquals(
             '/tmp/erwane-phpunit-resource-helper/ResourceHelperTest_testGetTmpTestPath/',
-            $path
+            $path,
         );
     }
 
@@ -95,6 +93,6 @@ class ResourceHelperTest extends TestCase
 
         $this->assertDirectoryExists($path);
         ResourceHelper::destroyTmpTestDir($this);
-        $this->assertDirectoryNotExists($path);
+        $this->assertDirectoryDoesNotExist($path);
     }
 }

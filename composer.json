@@ -21,13 +21,13 @@
         }
     ],
     "require": {
-        "php": "^7.2",
+        "php": "^8.1",
         "ext-json": "*"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": "^4.0",
-        "phpunit/phpunit": "^8.5",
-        "symfony/var-dumper": "^v5.0"
+        "cakephp/cakephp-codesniffer": ">=1",
+        "phpunit/phpunit": ">=10",
+        "symfony/var-dumper": ">=v6"
     },
     "autoload": {
         "psr-4": {

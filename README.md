@@ -1,8 +1,8 @@
 # PhpUnit resource helper
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/1.x/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
-[![Build Status](https://github.com/Erwane/phpunit-resource-helper/actions/workflows/ci.yml/badge.svg?branch=1.x)](https://github.com/Erwane/phpunit-resource-helper/actions)
+[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/2.x/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
+[![Build Status](https://github.com/Erwane/phpunit-resource-helper/actions/workflows/ci.yml/badge.svg?branch=2.x)](https://github.com/Erwane/phpunit-resource-helper/actions)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
 [![Packagist Version](https://img.shields.io/packagist/v/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
 
@@ -15,6 +15,7 @@ Help your phpunit tests to load resources from files, like, json content, raw e-
 | branch | This package version | PHP min |
 |:------:|----------------------|:-------:|
 |  1.x   | ^1.0                 | PHP 7.2 |
+|  2.x   | ^2.0                 | PHP 8.1 |
 
 ## Usage
 

@@ -10,14 +10,13 @@ declare(strict_types=1);
 
 namespace ResourceHelper\Test\TestCase;
 
+use InvalidArgumentException;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ResourceHelper\File;
 use ResourceHelper\ResourceHelper;
 
-/**
- * @uses   \ResourceHelper\File
- * @covers \ResourceHelper\File
- */
+#[CoversClass(File::class)]
 class FileTest extends TestCase
 {
     protected function tearDown(): void
@@ -28,8 +27,8 @@ class FileTest extends TestCase
 
     public function testGetPathUnknown(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectErrorMessage('Path "unknown.file" not found');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Path "unknown.file" not found');
         File::getPath('unknown.file');
     }
 

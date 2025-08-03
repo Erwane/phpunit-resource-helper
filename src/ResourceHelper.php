@@ -22,12 +22,12 @@ class ResourceHelper
     /**
      * @var string
      */
-    protected static $_baseDir;
+    protected static string $_baseDir;
 
     /**
      * @var string
      */
-    protected static $_tmpDir;
+    protected static string $_tmpDir;
 
     /**
      * Get resource base dir.
@@ -88,7 +88,7 @@ class ResourceHelper
      * @param \PHPUnit\Framework\TestCase|string $test Running test or test method full name
      * @return string
      */
-    public static function getTmpTestPath($test): string
+    public static function getTmpTestPath(TestCase|string $test): string
     {
         $name = $test;
         if ($test instanceof TestCase) {
@@ -106,7 +106,7 @@ class ResourceHelper
      * @param \PHPUnit\Framework\TestCase|string $test Running test or test method full name
      * @return string
      */
-    public static function createTmpTestDir($test): string
+    public static function createTmpTestDir(TestCase|string $test): string
     {
         self::destroyTmpTestDir($test);
 
@@ -122,7 +122,7 @@ class ResourceHelper
      * @param \PHPUnit\Framework\TestCase|string $test Running test or test method full name
      * @return void
      */
-    public static function destroyTmpTestDir($test): void
+    public static function destroyTmpTestDir(TestCase|string $test): void
     {
         $dir = self::getTmpTestPath($test);
         if (is_dir($dir)) {

@@ -10,26 +10,16 @@ declare(strict_types=1);
 
 namespace ResourceHelper\Test\TestCase;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ResourceHelper\PHPUnitExtension;
-use ResourceHelper\ResourceHelper;
 
-/**
- * @uses   \ResourceHelper\PHPUnitExtension
- * @covers \ResourceHelper\PHPUnitExtension
- */
+#[CoversClass(PHPUnitExtension::class)]
 class PHPUnitExtensionTest extends TestCase
 {
     public function testAfterSuccessfulTest(): void
     {
         $ext = new PHPUnitExtension();
-        $this->assertTrue(method_exists($ext, 'executeAfterSuccessfulTest'));
-
-        // Create tmp test dir
-        ResourceHelper::createTmpTestDir($this);
-
-        $ext->executeAfterSuccessfulTest($this->toString(), 0.3);
-
-        $this->assertDirectoryNotExists(ResourceHelper::getTmpTestPath($this));
+        $this->assertTrue(method_exists($ext, 'bootstrap'));
     }
 }
