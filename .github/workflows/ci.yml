@@ -29,8 +29,11 @@ jobs:
           TEST_NAME: Scarlett
         with:
           php_version: '8.0'
+          php_extensions: intl, mbstring, xdebug
           version: '8.5'
           coverage_clover: coverage.xml
+          configuration: phpunit.xml.dist
+
 
   cs-stan:
     name: Coding Standard & Static Analysis
