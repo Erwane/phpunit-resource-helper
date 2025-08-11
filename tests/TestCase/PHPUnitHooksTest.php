@@ -11,18 +11,18 @@ declare(strict_types=1);
 namespace ResourceHelper\Test\TestCase;
 
 use PHPUnit\Framework\TestCase;
-use ResourceHelper\PHPUnitExtension;
+use ResourceHelper\PHPUnitHooks;
 use ResourceHelper\ResourceHelper;
 
 /**
- * @uses   \ResourceHelper\PHPUnitExtension
- * @covers \ResourceHelper\PHPUnitExtension
+ * @uses   \ResourceHelper\PHPUnitHooks
+ * @covers \ResourceHelper\PHPUnitHooks
  */
-class PHPUnitExtensionTest extends TestCase
+class PHPUnitHooksTest extends TestCase
 {
     public function testAfterSuccessfulTest(): void
     {
-        $ext = new PHPUnitExtension();
+        $ext = new PHPUnitHooks();
         $this->assertTrue(method_exists($ext, 'executeAfterSuccessfulTest'));
 
         // Create tmp test dir

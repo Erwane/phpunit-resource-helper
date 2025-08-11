@@ -13,9 +13,9 @@ namespace ResourceHelper;
 use PHPUnit\Runner\AfterSuccessfulTestHook;
 
 /**
- * PHPUnit extension to clean up temp files.
+ * PHPUnit hooks to clean up temp files.
  */
-class PHPUnitExtension implements AfterSuccessfulTestHook
+class PHPUnitHooks implements AfterSuccessfulTestHook
 {
     /**
      * Cleanup test files if case of successful result.

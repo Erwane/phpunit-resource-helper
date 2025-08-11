@@ -11,10 +11,10 @@
 
     <filter>
         <whitelist>
-            <directory suffix=".php" phpVersion="7.2">src/</directory>
+            <directory suffix=".php">src/</directory>
         </whitelist>
     </filter>
     <extensions>
-        <extension class="ResourceHelper\PHPUnitExtension"></extension>
+        <extension class="ResourceHelper\PHPUnitHooks"></extension>
     </extensions>
 </phpunit>

@@ -15,7 +15,8 @@ Help your phpunit tests to load resources from files, like, json content, raw e-
 | branch | This package version | PHP min |       PHPUnit        |
 |:------:|----------------------|:-------:|:--------------------:|
 |  1.x   | ^1.0                 | PHP 7.2 | ^7.1 \| ^8.0 \| ^9.0 |
-|  2.0   | ^2.0                 | PHP 8.0 |     ^8.5 \| ^9.3     | 
+|  2.0   | 2.0.*                | PHP 8.0 |     ^8.5 \| ^9.3     |
+|  2.1   | ^2.1                 | PHP 8.1 |        >=8.5         |
 
 ## Usage
 
@@ -53,7 +54,7 @@ Set up ResourceHelper extension in your `phpunit.dist.xml` configuration file:
 ```xml
 <!-- phpunit.dist.xml -->
 <extensions>
-    <extension class="ResourceHelper\PHPUnitExtension"></extension>
+    <extension class="ResourceHelper\PHPUnitHooks"></extension>
 </extensions>
 ```
 
