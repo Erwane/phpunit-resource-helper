@@ -12,6 +12,7 @@ namespace ResourceHelper\Test\TestCase;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Runner\Version;
 use ResourceHelper\ResourceHelper;
 
 #[CoversClass(ResourceHelper::class)]
@@ -93,6 +94,11 @@ class ResourceHelperTest extends TestCase
 
         $this->assertDirectoryExists($path);
         ResourceHelper::destroyTmpTestDir($this);
-        $this->assertDirectoryDoesNotExist($path);
+
+        if (version_compare(Version::id(), '9.0', '<')) {
+            $this->assertDirectoryNotExists($path);
+        } else {
+            $this->assertDirectoryDoesNotExist($path);
+        }
     }
 }

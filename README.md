@@ -1,8 +1,8 @@
 # PhpUnit resource helper
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/2.x/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
-[![Build Status](https://github.com/Erwane/phpunit-resource-helper/actions/workflows/ci.yml/badge.svg?branch=2.x)](https://github.com/Erwane/phpunit-resource-helper/actions)
+[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/2.1/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
+[![Build Status](https://github.com/Erwane/phpunit-resource-helper/actions/workflows/ci.yml/badge.svg?branch=2.1)](https://github.com/Erwane/phpunit-resource-helper/actions)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
 [![Packagist Version](https://img.shields.io/packagist/v/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
 
@@ -12,10 +12,11 @@ Help your phpunit tests to load resources from files, like, json content, raw e-
 
 ## Version map
 
-| branch | This package version | PHP min |
-|:------:|----------------------|:-------:|
-|  1.x   | ^1.0                 | PHP 7.2 |
-|  2.x   | ^2.0                 | PHP 8.1 |
+| branch | This package version | PHP min |                 PHPUnit                 |
+|:------:|----------------------|:-------:|:---------------------------------------:|
+|  1.x   | ^1.0                 | PHP 7.2 |          ^7.1 \| ^8.0 \| ^9.0           |
+|  2.0   | 2.0.*                | PHP 8.0 |              ^8.5 \| ^9.3               |
+|  2.1   | ^2.1                 | PHP 8.1 | ^8.5 \| ^9.3 \| ^10.0 \| ^11.0 \| ^12.0 |
 
 ## Usage
 
@@ -28,7 +29,7 @@ Create a `resources` directory in your `tests` dir and put your files in. You ca
 You can also configure your base directory and tmp directory in your `tests/bootstrap.php` file:
 
 ```php
-use ResourceHelper\ResourceHelper;
+use ResourceHelper\ResourceHelper;  
 
 ResourceHelper::setBaseDir('/project/tests_resources/');
 ResourceHelper::setTmpDir('/project/tmp/');
@@ -37,7 +38,7 @@ ResourceHelper::setTmpDir('/project/tmp/');
 In your test, you can get your resources path, content or copy with `File` methods:
 
 ```php
-use ResourceHelper\File;
+use ResourceHelper\File;  
 
 // Get <project_dir>/tests/resources/webhooks/mailgun.json content
 $content = File::getContent('webhooks/mailgun.json');
@@ -49,6 +50,17 @@ $copy = File::getCopy('accounting/invoices.csv');
 You can clean your tmp directory with PHPUnit extension.  
 Only successful tests are cleaned, this allows you to check your resources copy files when test failed.  
 Set up ResourceHelper extension in your `phpunit.dist.xml` configuration file:
+
+### PHPUnit ^8.5 & ^9.3
+
+```xml
+<!-- phpunit.dist.xml -->
+<extensions>
+    <extension class="ResourceHelper\PHPUnitHooks"></extension>
+</extensions>
+```
+
+### PHPUnit >=10
 
 ```xml
 <!-- phpunit.dist.xml -->

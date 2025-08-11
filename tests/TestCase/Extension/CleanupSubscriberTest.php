@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace ResourceHelper\Test\TestCase\Extension;
 
-use Composer\InstalledVersions;
 use PHPUnit\Event\Code;
 use PHPUnit\Event\Telemetry;
 use PHPUnit\Event\Test\AfterTestMethodFinished;
@@ -18,6 +17,7 @@ use PHPUnit\Event\TestData\TestDataCollection;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Metadata\MetadataCollection;
+use PHPUnit\Runner\Version;
 use ResourceHelper\Extension\CleanupSubscriber;
 use ResourceHelper\ResourceHelper;
 use function hrtime;
@@ -27,13 +27,30 @@ class CleanupSubscriberTest extends TestCase
 {
     final protected function telemetryInfo(): Telemetry\Info
     {
-        return new Telemetry\Info(
-            new Telemetry\Snapshot(
+        if (version_compare(Version::id(), '10.1', '<')) {
+            $snapshot = new Telemetry\Snapshot(
+                Telemetry\HRTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\MemoryUsage::fromBytes(1000),
+                Telemetry\MemoryUsage::fromBytes(2000),
+            );
+        } elseif (version_compare(Version::id(), '10.3', '<')) {
+            $snapshot = new Telemetry\Snapshot(
+                Telemetry\HRTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\MemoryUsage::fromBytes(1000),
+                Telemetry\MemoryUsage::fromBytes(2000),
+                new Telemetry\GarbageCollectorStatus(0, 0, 0, 0, false, false, false, 0),
+            );
+        } else {
+            $snapshot = new Telemetry\Snapshot(
                 Telemetry\HRTime::fromSecondsAndNanoseconds(...hrtime()),
                 Telemetry\MemoryUsage::fromBytes(1000),
                 Telemetry\MemoryUsage::fromBytes(2000),
                 new Telemetry\GarbageCollectorStatus(0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, false, false, false, 0),
-            ),
+            );
+        }
+
+        return new Telemetry\Info(
+            $snapshot,
             Telemetry\Duration::fromSecondsAndNanoseconds(123, 456),
             Telemetry\MemoryUsage::fromBytes(2000),
             Telemetry\Duration::fromSecondsAndNanoseconds(234, 567),
@@ -41,7 +58,7 @@ class CleanupSubscriberTest extends TestCase
         );
     }
 
-    final protected function testValueObject(): Code\TestMethod
+    final protected function valueObject(): Code\TestMethod
     {
         return new Code\TestMethod(
             'FooTest',
@@ -56,14 +73,17 @@ class CleanupSubscriberTest extends TestCase
 
     public function testNotify(): void
     {
+        if (version_compare(Version::id(), '10.0.0', '<')) {
+            $this->markTestSkipped('Subscribers require phpunit >=10');
+        }
+
         ResourceHelper::createTmpTestDir($this);
 
         $sub = new CleanupSubscriber();
 
         $telemetryInfo = $this->telemetryInfo();
-        $phpunitVersion = InstalledVersions::getVersion('phpunit/phpunit');
-        if (version_compare($phpunitVersion, '12.0.0', '>=')) {
-            $test = $this->testValueObject();
+        if (version_compare(Version::id(), '12.1.0', '>=')) {
+            $test = $this->valueObject();
         } else {
             $test = 'testNotify';
         }
