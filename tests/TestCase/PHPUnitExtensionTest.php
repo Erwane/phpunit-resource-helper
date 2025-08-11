@@ -12,6 +12,7 @@ namespace ResourceHelper\Test\TestCase;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Runner\Version;
 use ResourceHelper\PHPUnitExtension;
 
 #[CoversClass(PHPUnitExtension::class)]
@@ -19,6 +20,10 @@ class PHPUnitExtensionTest extends TestCase
 {
     public function testAfterSuccessfulTest(): void
     {
+        if (version_compare(Version::id(), '10.0.0', '<')) {
+            $this->markTestSkipped('Extension require phpunit >=10');
+        }
+
         $ext = new PHPUnitExtension();
         $this->assertTrue(method_exists($ext, 'bootstrap'));
     }
