@@ -25,9 +25,9 @@
         "ext-json": "*"
     },
     "require-dev": {
-        "cakephp/cakephp-codesniffer": ">=1",
-        "phpunit/phpunit": ">=10",
-        "symfony/var-dumper": ">=v6"
+        "cakephp/cakephp-codesniffer": "^5.0",
+        "phpunit/phpunit": "^10.5",
+        "symfony/var-dumper": "^v6.0"
     },
     "autoload": {
         "psr-4": {
