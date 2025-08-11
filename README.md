@@ -1,7 +1,7 @@
 # PhpUnit resource helper
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
-[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/2.x/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
+[![codecov](https://codecov.io/gh/Erwane/phpunit-resource-helper/branch/2.0/graph/badge.svg?token=hF5HhETnkg)](https://codecov.io/gh/Erwane/phpunit-resource-helper)
 [![Build Status](https://github.com/Erwane/phpunit-resource-helper/actions/workflows/ci.yml/badge.svg?branch=2.0)](https://github.com/Erwane/phpunit-resource-helper/actions)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
 [![Packagist Version](https://img.shields.io/packagist/v/Erwane/phpunit-resource-helper)](https://packagist.org/packages/Erwane/phpunit-resource-helper)
@@ -12,10 +12,11 @@ Help your phpunit tests to load resources from files, like, json content, raw e-
 
 ## Version map
 
-| branch | This package version | PHP min |   PHPUnit    |
-|:------:|----------------------|:-------:|:------------:|
-|  1.x   | ^1.0                 | PHP 7.2 |     ^8.0     |
-|  2.0   | ^2.0                 | PHP 8.0 | ^8.5 \| ^9.3 | 
+| branch | This package version | PHP min |       PHPUnit        |
+|:------:|----------------------|:-------:|:--------------------:|
+|  1.x   | ^1.0                 | PHP 7.2 | ^7.1 \| ^8.0 \| ^9.0 |
+|  2.0   | 2.0.*                | PHP 8.0 |     ^8.5 \| ^9.3     |
+|  2.1   | ^2.1                 | PHP 8.1 |        >=8.5         |
 
 ## Usage
 
@@ -53,7 +54,7 @@ Set up ResourceHelper extension in your `phpunit.dist.xml` configuration file:
 ```xml
 <!-- phpunit.dist.xml -->
 <extensions>
-    <extension class="ResourceHelper\PHPUnitExtension"></extension>
+    <extension class="ResourceHelper\PHPUnitHooks"></extension>
 </extensions>
 ```
 
