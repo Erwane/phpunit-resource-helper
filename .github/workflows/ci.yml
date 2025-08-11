@@ -29,8 +29,8 @@ jobs:
           TEST_NAME: Scarlett
         with:
           php_version: '8.0'
-          version: 8
-          args: --coverage-text
+          version: '8.5'
+          coverage_clover: coverage.xml
 
   cs-stan:
     name: Coding Standard & Static Analysis
