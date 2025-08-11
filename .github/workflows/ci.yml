@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-      - '2.x'
+      - '2.0'
   pull_request:
     branches:
       - '*'
@@ -19,10 +19,7 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - '8.1'
-          - '8.2'
-          - '8.3'
-          - '8.4'
+          - '8.0'
 
     steps:
     - uses: actions/checkout@v4
@@ -45,7 +42,7 @@ jobs:
       env:
         XDEBUG_MODE: coverage
       run: |
-        if [[ '${{ matrix.php-version }}' == '8.1' ]]; then
+        if [[ '${{ matrix.php-version }}' == '8.0' ]]; then
           export CODECOVERAGE=1
           vendor/bin/phpunit --coverage-clover=coverage.xml
         else
@@ -53,8 +50,30 @@ jobs:
         fi
 
     - name: Submit code coverage
-      if: matrix.php-version == '8.1'
+      if: matrix.php-version == '8.0'
       uses: codecov/codecov-action@v5
       with:
         files: coverage.xml
         token: ${{ secrets.CODECOV_TOKEN }}
+
+  cs-stan:
+    name: Coding Standard & Static Analysis
+    runs-on: ubuntu-24.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        extensions: mbstring, intl
+        coverage: none
+        tools: phive, cs2pr
+
+    - name: Composer install
+      run: composer update
+
+    - name: Run phpcs
+      if: always()
+      run: vendor/bin/phpcs --report=checkstyle src/ tests/ | cs2pr

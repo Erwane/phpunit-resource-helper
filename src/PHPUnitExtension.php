@@ -10,21 +10,22 @@ declare(strict_types=1);
 
 namespace ResourceHelper;
 
-use PHPUnit\Runner\Extension\Extension;
-use PHPUnit\Runner\Extension\Facade;
-use PHPUnit\Runner\Extension\ParameterCollection;
-use PHPUnit\TextUI\Configuration\Configuration;
-use ResourceHelper\Extension\CleanupSubscriber;
+use PHPUnit\Runner\AfterSuccessfulTestHook;
 
 /**
- * PHPUnit extension.
- *
- * @codeCoverageIgnore
+ * PHPUnit extension to clean up temp files.
  */
-class PHPUnitExtension implements Extension
+class PHPUnitExtension implements AfterSuccessfulTestHook
 {
-    public function bootstrap(Configuration $configuration, Facade $facade, ParameterCollection $parameters): void
+    /**
+     * Cleanup test files if case of successful result.
+     *
+     * @param string $test Test name with namespace
+     * @param float $time Test duration time
+     * @return void
+     */
+    public function executeAfterSuccessfulTest(string $test, float $time): void
     {
-        $facade->registerSubscriber(new CleanupSubscriber());
+        ResourceHelper::destroyTmpTestDir($test);
     }
 }
