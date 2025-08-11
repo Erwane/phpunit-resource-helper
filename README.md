@@ -12,9 +12,10 @@ Help your phpunit tests to load resources from files, like, json content, raw e-
 
 ## Version map
 
-| branch | This package version | PHP min |
-|:------:|----------------------|:-------:|
-|  1.x   | ^1.0                 | PHP 7.2 |
+| branch | This package version | PHP min |       PHPUnit        |
+|:------:|----------------------|:-------:|:--------------------:|
+|  1.x   | ^1.0                 | PHP 7.2 | ^7.1 \| ^8.0 \| ^9.0 |
+|  2.0   | ^2.0                 | PHP 8.0 |     ^8.5 \| ^9.3     | 
 
 ## Usage
 

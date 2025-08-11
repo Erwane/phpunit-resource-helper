@@ -7,7 +7,7 @@ composer.phar
 .phpunit.cache
 
 /coverage.xml
-/auth.json
+/tmp
 
 # OS generated files #
 ######################

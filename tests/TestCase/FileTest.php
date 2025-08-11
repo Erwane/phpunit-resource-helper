@@ -29,7 +29,7 @@ class FileTest extends TestCase
     public function testGetPathUnknown(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectErrorMessage('Path "unknown.file" not found');
+        $this->expectExceptionMessage('Path "unknown.file" not found');
         File::getPath('unknown.file');
     }
 
