@@ -40,22 +40,50 @@ class CleanupSubscriberTest extends TestCase
                 Telemetry\MemoryUsage::fromBytes(2000),
                 new Telemetry\GarbageCollectorStatus(0, 0, 0, 0, false, false, false, 0),
             );
-        } else {
+        } elseif (version_compare(Version::id(), '13.0', '<')) {
             $snapshot = new Telemetry\Snapshot(
                 Telemetry\HRTime::fromSecondsAndNanoseconds(...hrtime()),
                 Telemetry\MemoryUsage::fromBytes(1000),
                 Telemetry\MemoryUsage::fromBytes(2000),
                 new Telemetry\GarbageCollectorStatus(0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, false, false, false, 0),
             );
+        } else {
+            $snapshot = new Telemetry\Snapshot(
+                Telemetry\HRTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\MemoryUsage::fromBytes(1000),
+                Telemetry\MemoryUsage::fromBytes(2000),
+                new Telemetry\GarbageCollectorStatus(0, 0, 0, 0, 0.0, 0.0, 0.0, 0.0, false, false, false, 0),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+            );
         }
 
-        return new Telemetry\Info(
-            $snapshot,
-            Telemetry\Duration::fromSecondsAndNanoseconds(123, 456),
-            Telemetry\MemoryUsage::fromBytes(2000),
-            Telemetry\Duration::fromSecondsAndNanoseconds(234, 567),
-            Telemetry\MemoryUsage::fromBytes(3000),
-        );
+        if (version_compare(Version::id(), '13.0', '<')) {
+            $info = new Telemetry\Info(
+                $snapshot,
+                Telemetry\Duration::fromSecondsAndNanoseconds(123, 456),
+                Telemetry\MemoryUsage::fromBytes(2000),
+                Telemetry\Duration::fromSecondsAndNanoseconds(234, 567),
+                Telemetry\MemoryUsage::fromBytes(3000),
+            );
+        } else {
+            $info = new Telemetry\Info(
+                $snapshot,
+                Telemetry\Duration::fromSecondsAndNanoseconds(123, 456),
+                Telemetry\MemoryUsage::fromBytes(2000),
+                Telemetry\Duration::fromSecondsAndNanoseconds(234, 567),
+                Telemetry\MemoryUsage::fromBytes(3000),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+                Telemetry\CpuTime::fromSecondsAndNanoseconds(...hrtime()),
+            );
+        }
+
+        return $info;
     }
 
     final protected function valueObject(): Code\TestMethod

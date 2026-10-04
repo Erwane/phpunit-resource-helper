@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '2.x'
+  pull_request:
+    branches:
+      - '*'
+
+permissions:
+  contents: read # to fetch code (actions/checkout)
+
+jobs:
+  testsuite:
+    runs-on: ubuntu-latest
+    name: Codecov
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: 8.5
+        ini-values: zend.assertions = 1
+        tools: composer:v2
+        coverage: pcov
+
+    - name: Composer install
+      run: composer update --no-interaction --no-progress
+
+    - name: Run PHPUnit
+      env:
+        XDEBUG_MODE: coverage
+      run: |
+          export CODECOVERAGE=1
+          vendor/bin/phpunit --coverage-clover=coverage.xml
+
+#    - name: Submit code coverage
+#      if: matrix.php == '8.2' && matrix.dependencies == 'highest'
+#      uses: codecov/codecov-action@v7
+#      with:
+#        files: coverage.xml
+#        token: ${{ secrets.CODECOV_TOKEN }}
